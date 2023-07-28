@@ -1,0 +1,23 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "Wololo"
+include ':app'
+include ':tp01'
+include ':tp01-correction'
+include ':mod4findview'
+include ':mod5demonavigation'
+include ':tp'
+include ':CadoX2'
+include ':mod6intent'
