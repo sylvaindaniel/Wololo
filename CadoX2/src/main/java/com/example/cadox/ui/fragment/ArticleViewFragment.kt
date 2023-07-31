@@ -12,19 +12,23 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.cadox.databinding.FragmentArticleViewBinding
 import com.example.cadox.repository.ArticleRepository
+import com.example.cadox.ui.ArticleViewViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class ArticleViewFragment : Fragment() {
     lateinit var binding : FragmentArticleViewBinding
+    val vm by viewModels<ArticleViewViewModel> ()
+
     val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()){
             if(it) {
                 val dialMai = Intent(Intent.ACTION_SENDTO).apply {
                     data = Uri.parse("sms:+33685095038")
-                    putExtra("sms_body", "Pour me faire un cadeau : "+"${binding.article?.intitule}.\n")
+                    putExtra("sms_body", "Pour me faire un cadeau : "+"${binding.vm?.article?.intitule}.\n")
                 }
                 startActivity(dialMai)
 
@@ -42,14 +46,14 @@ class ArticleViewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.article=ArticleRepository.getArticle(0L)
+        binding.vm=vm
 
         binding.imageButtonEdit.setOnClickListener {
             val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
             builder.setMessage("Voulez-vous modifier cet article?")
                 .setTitle("Edition Article")
                 .setPositiveButton("oui"){ _: DialogInterface, _: Int ->
-                    binding.article?.let {article ->
+                    binding.vm?.article?.let {article ->
                         val destination =
                             ArticleViewFragmentDirections.actionArticleViewFragmentToArticleAddEditFragment(article)
                         findNavController().navigate((destination))
@@ -62,11 +66,10 @@ class ArticleViewFragment : Fragment() {
         }
 
 
-        val openUrlIntent = Intent(Intent.ACTION_VIEW, Uri.parse(binding.article?.url))
+        val openUrlIntent = Intent(Intent.ACTION_VIEW, Uri.parse(binding.vm?.article?.url))
 
         binding.imageButtonUrl.setOnClickListener{
             startActivity(openUrlIntent)
-            //Toast.makeText(requireContext(), binding.article?.url ?: "Pas d'URL", Toast.LENGTH_SHORT).show()
         }
 
 

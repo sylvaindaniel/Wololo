@@ -7,6 +7,10 @@
         <variable
             name="article"
             type="com.example.cadox.bo.Article" />
+
+        <variable
+            name="vm"
+            type="com.example.cadox.ui.ArticleViewViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +27,7 @@
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewIntitule"
-            tools:text="@{article.description}" />
+            tools:text="@{vm.article.description}" />
 
         <TextView
             android:id="@+id/textView2"
@@ -43,7 +47,7 @@
             android:layout_marginTop="40dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
-            tools:text="@{article.intitule}" />
+            tools:text="@{vm.article.intitule}" />
 
         <TextView
             android:id="@+id/textViewPrix"
@@ -53,7 +57,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
-            tools:text="@{String.valueOf(article.prix)+ ` €`}" />
+            tools:text="@{String.valueOf(vm.article.prix)+ ` €`}" />
 
         <TextView
             android:id="@+id/TextViewDateAchat"
@@ -63,7 +67,7 @@
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewPrix"
-            tools:text="@{`Acheté le `+String.valueOf(article.dateAchat)}" />
+            tools:text="@{`Acheté le `+String.valueOf(vm.article.dateAchat)}" />
 
         <CheckBox
             android:id="@+id/checkBoxAchete"
@@ -71,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="150dp"
             android:layout_marginTop="20dp"
-            android:checked="@={article.achete}"
+            android:checked="@={vm.article.achete}"
             android:text=""
             app:layout_constraintStart_toEndOf="@+id/TextViewDateAchat"
             app:layout_constraintTop_toBottomOf="@+id/textViewPrix" />
@@ -82,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:max="8"
-            android:rating="@{article.niveau}"
+            android:rating="@{vm.article.niveau}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextViewDateAchat" />
@@ -95,7 +99,7 @@
             android:layout_marginTop="40dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-            tools:text="@{article.url}" />
+            tools:text="@{vm.article.url}" />
 
         <ImageButton
             android:id="@+id/imageButtonEdit"
