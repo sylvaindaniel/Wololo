@@ -27,6 +27,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.button.setOnClickListener {
+            //on créé la direction pour naviguer de LoginFragment vers HomeFragment
             val direction = LoginFragmentDirections.actionLoginFragmentToHomeFragment(
                 User(
                     binding.editTextTextEmailAddress.text.toString(),
